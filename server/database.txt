@@ -1,0 +1,20 @@
+CREATE DATABASE taskmanager;
+
+USE taskmanager;
+
+CREATE TABLE usuarios(
+id INT NOT NULL AUTO_INCREMENT,
+nombre VARCHAR(255) NOT NULL,
+contrasena VARCHAR(255) NOT NULL,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE task (
+    taskid INT NOT NULL AUTO_INCREMENT,
+    userid INT,
+    date VARCHAR(10),
+    task VARCHAR(200),
+    PRIMARY KEY (taskid),
+    FOREIGN KEY (userid) REFERENCES usuarios(id)
+);
+
