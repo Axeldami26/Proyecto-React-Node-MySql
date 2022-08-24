@@ -132,7 +132,7 @@ function App() {
           <div className="ui input">
             <input
               style={{ marginLeft: "10px" }}
-              type="text"
+              type="password"
               value={modal.contrasenaOld}
               onChange={(e) =>
                 setModal({ ...modal, contrasenaOld: e.target.value })
@@ -141,7 +141,7 @@ function App() {
             ></input>
             <input
               style={{ marginLeft: "10px" }}
-              type="text"
+              type="password"
               value={modal.newConstrasena1}
               onChange={(e) =>
                 setModal({ ...modal, newConstrasena1: e.target.value })
@@ -150,7 +150,7 @@ function App() {
             ></input>
             <input
               style={{ marginLeft: "10px" }}
-              type="text"
+              type="password"
               value={modal.newConstrasena2}
               onChange={(e) =>
                 setModal({ ...modal, newConstrasena2: e.target.value })
