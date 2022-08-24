@@ -20,11 +20,10 @@ app.get('/tasks/:id', (req, res) => {
   });
 });
 
-app.get('/user/:nombre/:contrasena', (req, res) => {
+app.get('/:nombre/:contrasena', (req, res) => {
   console.log("llegaron los datos")
   console.log(req.params)
   const consulta = `SELECT id FROM usuarios WHERE nombre = '${req.params.nombre}' and contrasena = '${req.params.contrasena}'`;
-  console.log(consulta, `add tas`);
   connection.query(consulta, (err, result) => {
     if (err) {
       console.log(err);
@@ -35,9 +34,8 @@ app.get('/user/:nombre/:contrasena', (req, res) => {
 });
 
 app.post('/addtask', (req, res) => {
-  const ADD_TASK = `INSERT INTO task (task, userid, date) VALUES ('${req.body.task}', ${req.body.id}, '${req.body.date}')`;
-  console.log(ADD_TASK, `add tas`);
-  connection.query(ADD_TASK, (err) => {
+  const consulta = `INSERT INTO task (task, userid, date) VALUES ('${req.body.task}', ${req.body.id}, '${req.body.date}')`;
+  connection.query(consulta, (err) => {
     if (err) {
       console.log(err);
     } else {
@@ -46,10 +44,9 @@ app.post('/addtask', (req, res) => {
   });
 });
 
-app.post('/user/register', (req, res) => {
-  const insert= `INSERT INTO usuarios (nombre,contrasena) VALUES ('${req.body.nombre}', '${req.body.contrasena}')`;
-  console.log(insert, `add tas`);
-  connection.query(insert, (err) => {
+app.post('/register', (req, res) => {
+  const consulta= `INSERT INTO usuarios (nombre,contrasena) VALUES ('${req.body.nombre}', '${req.body.contrasena}')`;
+  connection.query(consulta, (err) => {
     if (err) {
       console.log(err);
     } else {
@@ -60,12 +57,25 @@ app.post('/user/register', (req, res) => {
 
  
 app.delete('/task/:taskid', (req, res) => {
-  const DELETE_TASK = `DELETE FROM task WHERE (taskid = ${req.params.taskid});`;
-  connection.query(DELETE_TASK, (err, result) => {
+  const consulta = `DELETE FROM task WHERE (taskid = ${req.params.taskid});`;
+  connection.query(consulta, (err, result) => {
     if (err) {
       console.log(err);
     } else {
       res.send('deleted');
+    }
+  });
+});
+
+app.put('/password', (req, res) => {
+  console.log(req)
+  const consulta = `UPDATE usuarios SET contrasena = '${req.body.contrasena}' WHERE id = ${req.body.id};`;
+  console.log(consulta)
+  connection.query(consulta, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send('updated');
     }
   });
 });

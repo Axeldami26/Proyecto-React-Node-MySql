@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
 import axios from "axios";
-
 import { TaskCard } from "./TaskCards";
 
 const TaskManager = ({props}) => {
@@ -16,15 +14,9 @@ const TaskManager = ({props}) => {
 
   const onChangeTask = (e) => setTask(e.target.value);
   const onChangeDate = (e) => setDate(e.target.value);
-
   const onDoneClick = () => onDeleteClick;
 
-  const showSignInError = () => (
-    <div className="ui red message">Nesesitas logearte primero !</div>
-  );
-
   const onSubmitClick = () => {
-    
     axios
       .post(`http://localhost:4000/addtask`, {
         task:task,
@@ -41,8 +33,7 @@ const TaskManager = ({props}) => {
   const getTaskList = () => {
     axios
       .get(`http://localhost:4000/tasks/${props.id}`)
-      .then((respose) => respose.data)
-      .then((respose) => setTaskList(respose));
+      .then((respose) => setTaskList(respose.data));
   };
 
   const onDeleteClick = (taskid) => {
@@ -54,8 +45,8 @@ const TaskManager = ({props}) => {
   };
 
   return(
-    props.id?
-  <div>
+    props?
+  <div className="task-list">
     <h3 style={{ padding: `20px` }}>
       Hola!
       <span style={{ color: `#6185d3` }}> {props.nombre}</span>! Añade tus tareas
